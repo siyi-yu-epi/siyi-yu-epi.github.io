@@ -1,0 +1,149 @@
+/* Overrides for jekyll-theme-minimal. Loaded after the theme stylesheet. */
+
+/* --- Page frame: narrow outer margins, wide content column --- */
+
+body {
+  padding: 32px 24px;
+}
+
+div.wrapper {
+  width: auto;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 56px;
+}
+
+header {
+  float: none;
+  position: sticky;
+  top: 32px;
+  width: 250px;
+  flex: 0 0 250px;
+  padding-right: 0;
+}
+
+section {
+  float: none;
+  width: auto;
+  flex: 1 1 auto;
+  min-width: 0;
+  /* The theme adds top/bottom rules and padding below 960px; the flex layout
+     here survives further down than that, so neutralise them. */
+  border: none;
+  margin: 0;
+  padding: 0 0 50px;
+}
+
+header h1 {
+  margin-bottom: 12px;
+}
+
+header p {
+  margin: 0 0 8px;
+}
+
+/* --- Profile photo --- */
+
+.profile-photo {
+  display: block;
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: 50%;
+  margin: 0 0 18px;
+  border: 1px solid #e5e5e5;
+}
+
+.profile-contact {
+  color: #727272;
+}
+
+.profile-links img {
+  vertical-align: middle;
+}
+
+/* --- Tabs --- */
+
+.tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 24px;
+  padding: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.tabs__tab {
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 15px;
+  color: #727272;
+  cursor: pointer;
+}
+
+.tabs__tab:hover {
+  color: #267CB9;
+}
+
+.tabs__tab[aria-selected="true"] {
+  color: #267CB9;
+  border-bottom-color: #267CB9;
+  font-weight: bold;
+}
+
+.tabs__tab:focus-visible {
+  outline: 2px solid #267CB9;
+  outline-offset: 2px;
+}
+
+.tab-panel[hidden] {
+  display: none;
+}
+
+.tab-panel > :first-child {
+  margin-top: 0;
+}
+
+/* The per-panel heading is redundant once the tab strip is built. */
+.tabs--enhanced .tab-panel > h2:first-child {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --- Responsive --- */
+
+@media print, screen and (max-width: 900px) {
+  body {
+    padding: 24px 16px;
+  }
+
+  div.wrapper {
+    display: block;
+  }
+
+  header {
+    position: static;
+    width: auto;
+    padding-right: 0;
+    margin-bottom: 24px;
+  }
+
+  section {
+    border: none;
+    padding: 0 0 30px;
+    margin: 0;
+  }
+}

@@ -3,7 +3,9 @@ description: "Clinical Assistant Professor of Management at Purdue University re
 theme: jekyll-theme-minimal
 role: "Clinical Assistant Professor of Management"
 affiliation: "Mitch Daniels School of Business, Purdue University"
-email: "yu1344@purdue.edu"
+email_display: "yu1344 at purdue dot edu"
+profile_image: /assets/img/profile.jpg
+profile_alt: "Portrait of Siyi (Ruth) Yu"
 cv_path: /assets/files/Siyi-Yu-CV.pdf
 google_scholar: "https://scholar.google.com/citations?user=kr3FpVwAAAAJ&hl=en"
 ssrn: "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10640376"
