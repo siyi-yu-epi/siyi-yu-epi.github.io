@@ -119,6 +119,7 @@ End with one sentence inviting research and collaboration inquiries through the 
 Use GitHub Pages' native Jekyll support:
 
 - `_config.yml` selects `jekyll-theme-minimal`, sets the site title and description, and points the theme's logo field to the profile image.
+- `_layouts/default.html` is a small override of Minimal's stock layout. It keeps the official theme stylesheet while adding descriptive portrait alt text and the approved sidebar email and CV links.
 - `index.md` contains the approved homepage text and links.
 - `assets/img/profile.jpg` contains the optimized profile derivative.
 - `assets/files/Siyi-Yu-CV.pdf` contains the sanitized public CV.
