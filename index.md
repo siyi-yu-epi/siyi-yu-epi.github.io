@@ -14,6 +14,7 @@ layout: default
 <div class="tab-panel" id="about" data-tab-title="About" markdown="1">
 
 ## About
+{: #about-heading}
 
 I am a Clinical Assistant Professor of Management at the Marketing Department, [Daniels School of Business](https://business.purdue.edu/), Purdue University. My research focuses on healthcare marketing, public policy, and large language models, using causal inference, discrete choice models, and machine learning.
 
@@ -35,6 +36,7 @@ For research and collaboration inquiries, email me at {{ site.email_display }}.
 <div class="tab-panel" id="research" data-tab-title="Research" markdown="1">
 
 ## Research
+{: #research-heading}
 
 ### Research themes
 
@@ -62,6 +64,7 @@ For research and collaboration inquiries, email me at {{ site.email_display }}.
 <div class="tab-panel" id="teaching" data-tab-title="Teaching" markdown="1">
 
 ## Teaching
+{: #teaching-heading}
 
 At Purdue, I teach Marketing Research and Marketing Management.
 
@@ -72,6 +75,7 @@ For my complete teaching record, including course evaluations and past offerings
 <div class="tab-panel" id="engagement" data-tab-title="Engagement" markdown="1">
 
 ## Engagement
+{: #engagement-heading}
 
 I chair the DSB AI in Marketing Committee and serve as the department liaison for the Daniels Insights Blog.
 

@@ -100,6 +100,9 @@ class SiteContractTests(unittest.TestCase):
         for title in TAB_TITLES:
             self.assertIn(f'data-tab-title="{title}"', index)
             self.assertIn(f"## {title}", index)
+            # Without an explicit id, kramdown auto-generates one from the
+            # heading text that collides with the panel's own id.
+            self.assertIn(f"{{: #{title.lower()}-heading}}", index)
         self.assertEqual(index.count('class="tab-panel"'), len(TAB_TITLES))
         # markdown="1" is what lets kramdown parse Markdown inside the panels.
         self.assertEqual(index.count('markdown="1"'), len(TAB_TITLES))
