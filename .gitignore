@@ -1,0 +1,7 @@
+.superpowers/
+tmp/
+_site/
+.jekyll-cache/
+.sass-cache/
+.bundle/
+__pycache__/
