@@ -1,12 +1,13 @@
 title: "Siyi (Ruth) Yu"
 description: "Clinical Assistant Professor of Management at Purdue University researching healthcare marketing, public policy, and large language models."
 theme: jekyll-theme-minimal
-logo: /assets/img/profile.jpg
-logo_alt: "Portrait of Siyi (Ruth) Yu"
 role: "Clinical Assistant Professor of Management"
 affiliation: "Mitch Daniels School of Business, Purdue University"
 email: "yu1344@purdue.edu"
 cv_path: /assets/files/Siyi-Yu-CV.pdf
+google_scholar: "https://scholar.google.com/citations?user=kr3FpVwAAAAJ&hl=en"
+ssrn: "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10640376"
+linkedin: "https://www.linkedin.com/in/siyi-yu-407553239/"
 url: "https://siyi-yu-epi.github.io"
 lang: "en-US"
 show_downloads: false

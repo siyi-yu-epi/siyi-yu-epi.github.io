@@ -36,12 +36,16 @@ class SiteContractTests(unittest.TestCase):
         config = CONFIG.read_text(encoding="utf-8")
         for expected in (
             "theme: jekyll-theme-minimal",
-            "logo: /assets/img/profile.jpg",
             "cv_path: /assets/files/Siyi-Yu-CV.pdf",
             'email: "yu1344@purdue.edu"',
+            'google_scholar: "https://scholar.google.com/citations?user=kr3FpVwAAAAJ&hl=en"',
+            'ssrn: "https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=10640376"',
+            'linkedin: "https://www.linkedin.com/in/siyi-yu-407553239/"',
             "show_downloads: false",
         ):
             self.assertIn(expected, config)
+        self.assertNotIn("logo:", config)
+        self.assertNotIn("logo_alt:", config)
         self.assertNotRegex(config, PHONE_LABEL_RE)
 
     def test_layout_has_accessible_sidebar_and_no_custom_script(self):
@@ -50,6 +54,13 @@ class SiteContractTests(unittest.TestCase):
         self.assertIn('alt="{{ site.logo_alt | escape }}"', layout)
         self.assertIn('href="mailto:{{ site.email }}"', layout)
         self.assertIn("site.cv_path | relative_url", layout)
+        for expected in (
+            'href="{{ site.google_scholar }}" aria-label="Google Scholar"',
+            'href="{{ site.ssrn }}" aria-label="SSRN"',
+            'href="{{ site.linkedin }}" aria-label="LinkedIn"',
+        ):
+            self.assertIn(expected, layout)
+        self.assertNotIn("Hosted on GitHub Pages using the Minimal theme.", layout)
         self.assertNotIn("<script", layout.lower())
         self.assertNotRegex(layout, PHONE_LABEL_RE)
 
@@ -59,12 +70,14 @@ class SiteContractTests(unittest.TestCase):
         for heading in (
             "## About",
             "## Research themes",
-            "## Current projects",
             "## Selected publications",
             "## Teaching and service",
             "## Contact",
         ):
             self.assertIn(heading, index)
+        self.assertTrue(
+            "## Current projects" in index or "## Work in progress" in index
+        )
         for required_text in (
             "The Birth Control Service Mix Post-Dobbs",
             "Impeding Drug Newcomers?",
