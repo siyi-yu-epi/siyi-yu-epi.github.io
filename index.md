@@ -81,6 +81,8 @@ For research and collaboration inquiries, email me at {{ site.email_display }}.
 
 {% include entries.html items=site.data.courses %}
 
+
+
 For my complete teaching record, including evaluations and past offerings, see my [curriculum vitae]({{ site.cv_path | relative_url }}).
 
 </div>
@@ -94,6 +96,8 @@ For my complete teaching record, including evaluations and past offerings, see m
 {: #service-heading}
 
 {% include entries.html items=site.data.service %}
+
+
 
 For my complete record of presentations, service, honors, grants, memberships, and skills, see my [curriculum vitae]({{ site.cv_path | relative_url }}).
 

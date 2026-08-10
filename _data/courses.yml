@@ -1,8 +1,10 @@
 # Courses taught. Fields: title, meta, body (all optional except title).
 # Add `body` for a one-line course description when you want one.
 
-- title: "Marketing Research"
+- title: "MKTG 42500 - Marketing Research"
   meta: "Purdue University"
+  body: "Offered to undergraduate students on research design and analysis in marketing."
 
-- title: "Marketing Management"
+- title: "MKTG 32400 -Marketing Management"
   meta: "Purdue University"
+  body: "Offered to undergraduate students as an introduction to the principles and practices of marketing management."
