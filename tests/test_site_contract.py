@@ -12,6 +12,7 @@ CV = ROOT / "assets" / "files" / "Siyi-Yu-CV.pdf"
 CONFIG = ROOT / "_config.yml"
 LAYOUT = ROOT / "_layouts" / "default.html"
 INDEX = ROOT / "index.md"
+README = ROOT / "README.md"
 PHONE_LABEL_RE = re.compile(r"\bphone\s*:", re.IGNORECASE)
 
 
@@ -76,6 +77,18 @@ class SiteContractTests(unittest.TestCase):
         ):
             self.assertIn(required_text, index)
         self.assertNotRegex(index, PHONE_LABEL_RE)
+
+    def test_readme_documents_stable_update_paths(self):
+        readme = README.read_text(encoding="utf-8")
+        for expected in (
+            "https://siyi-yu-epi.github.io",
+            "index.md",
+            "assets/img/profile.jpg",
+            "assets/files/Siyi-Yu-CV.pdf",
+            "scripts/prepare_assets.py",
+        ):
+            self.assertIn(expected, readme)
+        self.assertNotRegex(readme, PHONE_LABEL_RE)
 
 
 if __name__ == "__main__":
