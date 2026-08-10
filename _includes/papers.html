@@ -1,0 +1,27 @@
+{%- comment -%}
+Renders a list of papers from a data file.
+  {% include papers.html items=site.data.publications numbered=true %}
+{%- endcomment -%}
+{%- assign tag = "ul" -%}{%- if include.numbered -%}{%- assign tag = "ol" -%}{%- endif -%}
+<{{ tag }} class="paper-list{% if include.numbered %} paper-list--numbered{% endif %}">
+{%- for paper in include.items %}
+  <li class="paper">
+    <span class="paper__title">{{ paper.title | escape }}</span>
+    {%- if paper.authors %}
+    <span class="paper__authors">{{ paper.authors | escape }}</span>
+    {%- endif %}
+    {%- if paper.venue or paper.year or paper.detail %}
+    <span class="paper__meta"><em>{{ paper.venue | escape }}</em>{% if paper.detail %}, {{ paper.detail | escape }}{% endif %}{% if paper.year %}, {{ paper.year }}{% endif %}</span>
+    {%- endif %}
+    {%- if paper.status %}
+    <span class="pill">{{ paper.status | escape }}</span>
+    {%- endif %}
+    {%- if paper.links %}
+    <span class="paper__links">{% for link in paper.links %}<a href="{{ link.url }}">{{ link.label | escape }}</a>{% endfor %}</span>
+    {%- endif %}
+    {%- if paper.abstract %}
+    <details class="paper__abstract"><summary>Abstract</summary><p>{{ paper.abstract | escape }}</p></details>
+    {%- endif %}
+  </li>
+{%- endfor %}
+</{{ tag }}>

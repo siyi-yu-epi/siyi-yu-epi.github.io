@@ -1,0 +1,17 @@
+{%- comment -%}
+Generic title / affiliation / description list, used for courses and service.
+  {% include entries.html items=site.data.courses %}
+{%- endcomment -%}
+<ul class="entry-list">
+{%- for entry in include.items %}
+  <li class="entry">
+    <span class="entry__title">{{ entry.title | escape }}</span>
+    {%- if entry.meta %}
+    <span class="entry__meta">{{ entry.meta | escape }}</span>
+    {%- endif %}
+    {%- if entry.body %}
+    <span class="entry__body">{{ entry.body }}</span>
+    {%- endif %}
+  </li>
+{%- endfor %}
+</ul>

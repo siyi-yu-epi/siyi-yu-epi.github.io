@@ -2,6 +2,7 @@ from pathlib import Path
 import re
 import unittest
 
+import yaml
 from PIL import Image
 from pypdf import PdfReader
 
@@ -16,13 +17,21 @@ STYLESHEET = ROOT / "assets" / "css" / "site.css"
 TABS_SCRIPT = ROOT / "assets" / "js" / "tabs.js"
 INDEX = ROOT / "index.md"
 README = ROOT / "README.md"
+DATA = ROOT / "_data"
+INCLUDES = ROOT / "_includes"
+
 PHONE_LABEL_RE = re.compile(r"\bphone\s*:", re.IGNORECASE)
 HARVESTABLE_EMAIL_RE = re.compile(r"mailto:|yu1344@purdue\.edu", re.IGNORECASE)
 OBFUSCATED_EMAIL = "yu1344 at purdue dot edu"
 TAB_TITLES = ("About", "Research", "Teaching", "Engagement")
+DATA_FILES = ("publications", "working_papers", "news", "courses", "service")
 
 
-class SiteContractTests(unittest.TestCase):
+def load_data(name):
+    return yaml.safe_load((DATA / f"{name}.yml").read_text(encoding="utf-8"))
+
+
+class AssetTests(unittest.TestCase):
     def test_profile_asset_is_web_sized(self):
         self.assertTrue(PROFILE.is_file(), f"Missing {PROFILE}")
         self.assertLessEqual(PROFILE.stat().st_size, 500_000)
@@ -37,8 +46,9 @@ class SiteContractTests(unittest.TestCase):
         text = "\n".join(page.extract_text() or "" for page in reader.pages)
         self.assertNotRegex(text, PHONE_LABEL_RE)
 
+
+class ConfigAndLayoutTests(unittest.TestCase):
     def test_config_selects_minimal_and_stable_assets(self):
-        self.assertTrue(CONFIG.is_file(), f"Missing {CONFIG}")
         config = CONFIG.read_text(encoding="utf-8")
         for expected in (
             "theme: jekyll-theme-minimal",
@@ -55,7 +65,6 @@ class SiteContractTests(unittest.TestCase):
         self.assertNotRegex(config, PHONE_LABEL_RE)
 
     def test_layout_shows_photo_and_never_exposes_a_harvestable_address(self):
-        self.assertTrue(LAYOUT.is_file(), f"Missing {LAYOUT}")
         layout = LAYOUT.read_text(encoding="utf-8")
         self.assertIn('class="profile-photo"', layout)
         self.assertIn("site.profile_image | relative_url", layout)
@@ -69,6 +78,7 @@ class SiteContractTests(unittest.TestCase):
         ):
             self.assertIn(expected, layout)
         self.assertIn("head-custom.html", layout)
+        self.assertIn('class="site-footer"', layout)
         self.assertNotIn("Hosted on GitHub Pages using the Minimal theme.", layout)
         self.assertNotIn("<script", layout.lower())
         self.assertNotRegex(layout, HARVESTABLE_EMAIL_RE)
@@ -82,21 +92,33 @@ class SiteContractTests(unittest.TestCase):
         self.assertIn("/assets/js/tabs.js", head_custom)
         self.assertIn("defer", head_custom)
 
-        stylesheet = STYLESHEET.read_text(encoding="utf-8")
-        self.assertIn(".profile-photo", stylesheet)
-        self.assertIn(".tabs__list", stylesheet)
-        # The theme's fixed 860px column is what creates the wide side margins.
-        self.assertIn("div.wrapper", stylesheet)
-        self.assertIn("max-width: 1500px", stylesheet)
-
         script = TABS_SCRIPT.read_text(encoding="utf-8")
         self.assertIn('setAttribute("role", "tab")', script)
         self.assertIn('setAttribute("role", "tabpanel")', script)
 
-    def test_index_declares_four_tabs_with_all_approved_content(self):
-        self.assertTrue(INDEX.is_file(), f"Missing {INDEX}")
+    def test_stylesheet_keeps_conventional_page_margins_and_components(self):
+        stylesheet = STYLESHEET.read_text(encoding="utf-8")
+        # The theme's fixed 860px column is what the overrides replace; the
+        # content column must stay a readable width rather than full-bleed.
+        self.assertIn("max-width: 1100px", stylesheet)
+        for component in (
+            ".profile-photo",
+            ".tabs__list",
+            ".paper-list",
+            ".entry-list",
+            ".news-list",
+            ".link-list",
+            ".site-footer",
+        ):
+            self.assertIn(component, stylesheet)
+        # Tabs must not hide three quarters of the page when printed.
+        self.assertIn("@media print", stylesheet)
+
+
+class ContentTests(unittest.TestCase):
+    def test_index_declares_four_tabs_and_pulls_lists_from_data(self):
         index = INDEX.read_text(encoding="utf-8")
-        self.assertIn("<div class=\"tabs\" data-tabs", index)
+        self.assertIn('<div class="tabs" data-tabs', index)
         for title in TAB_TITLES:
             self.assertIn(f'data-tab-title="{title}"', index)
             self.assertIn(f"## {title}", index)
@@ -104,25 +126,48 @@ class SiteContractTests(unittest.TestCase):
             # heading text that collides with the panel's own id.
             self.assertIn(f"{{: #{title.lower()}-heading}}", index)
         self.assertEqual(index.count('class="tab-panel"'), len(TAB_TITLES))
-        # markdown="1" is what lets kramdown parse Markdown inside the panels.
         self.assertEqual(index.count('markdown="1"'), len(TAB_TITLES))
-        for required_text in (
-            "### Research themes",
-            "### Selected publications",
-            "### Work in progress",
+
+        for include in (
+            "{% include news.html items=site.data.news %}",
+            "{% include papers.html items=site.data.publications numbered=true %}",
+            "{% include papers.html items=site.data.working_papers %}",
+            "{% include entries.html items=site.data.courses %}",
+            "{% include entries.html items=site.data.service %}",
+        ):
+            self.assertIn(include, index)
+
+        self.assertIn("{{ site.email_display }}", index)
+        self.assertIn("https://business.purdue.edu/", index)
+        self.assertNotRegex(index, HARVESTABLE_EMAIL_RE)
+        self.assertNotRegex(index, PHONE_LABEL_RE)
+
+    def test_includes_exist_for_every_data_driven_list(self):
+        for name in ("papers", "entries", "news"):
+            self.assertTrue((INCLUDES / f"{name}.html").is_file(), name)
+
+    def test_data_files_parse_and_keep_the_approved_record(self):
+        for name in DATA_FILES:
+            self.assertTrue((DATA / f"{name}.yml").is_file(), name)
+            self.assertIsInstance(load_data(name), list, name)
+
+        titles = " ".join(p["title"] for p in load_data("publications"))
+        self.assertIn("Price versus service satisfaction", titles)
+        self.assertIn("Pharmaceutical Pricing", titles)
+
+        wip = " ".join(p["title"] for p in load_data("working_papers"))
+        for required in (
             "The Birth Control Service Mix Post-Dobbs",
             "Impeding Drug Newcomers?",
             "Demand Displacement in the GLP-1 Market",
             "Artificial Intelligence in Marketing Research",
-            "Price versus service satisfaction",
-            "Pharmaceutical Pricing",
-            "{{ site.email_display }}",
-            "site.cv_path | relative_url",
-            "https://business.purdue.edu/",
         ):
-            self.assertIn(required_text, index)
-        self.assertNotRegex(index, HARVESTABLE_EMAIL_RE)
-        self.assertNotRegex(index, PHONE_LABEL_RE)
+            self.assertIn(required, wip)
+
+        for name in DATA_FILES:
+            raw = (DATA / f"{name}.yml").read_text(encoding="utf-8")
+            self.assertNotRegex(raw, HARVESTABLE_EMAIL_RE, name)
+            self.assertNotRegex(raw, PHONE_LABEL_RE, name)
 
     def test_readme_documents_stable_update_paths(self):
         readme = README.read_text(encoding="utf-8")
@@ -134,6 +179,7 @@ class SiteContractTests(unittest.TestCase):
             "assets/css/site.css",
             "scripts/prepare_assets.py",
             "data-tab-title",
+            "_data/publications.yml",
         ):
             self.assertIn(expected, readme)
         self.assertNotRegex(readme, PHONE_LABEL_RE)

@@ -1,0 +1,8 @@
+# Courses taught. Fields: title, meta, body (all optional except title).
+# Add `body` for a one-line course description when you want one.
+
+- title: "Marketing Research"
+  meta: "Purdue University"
+
+- title: "Marketing Management"
+  meta: "Purdue University"

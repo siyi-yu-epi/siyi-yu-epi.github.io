@@ -1,0 +1,16 @@
+# Work in progress. Same fields as publications.yml.
+# Use `status` for the review stage - it renders as a small badge.
+
+- title: "The Birth Control Service Mix Post-Dobbs: How Abortion Bans Reshape Americans' Choices of Contraceptive Procedures"
+  authors: "With Qiang Liu, Hongju Liu, and Yong Cai"
+  status: "Under review at M&SOM"
+
+- title: "Impeding Drug Newcomers? Investigating the Impact of Integrated Delivery Networks on Physician New Drug Adoption"
+  authors: "With Hongju Liu, Qiang Liu, and Yong Cai"
+  status: "Ready for submission"
+
+- title: "Demand Displacement in the GLP-1 Market: Descriptive Evidence and Within-Patient Analysis"
+  authors: "With Sungjin Kim, Sungsik Park, Qiang Liu, and Yong Cai"
+
+- title: "Artificial Intelligence in Marketing Research: An Umbrella Review"
+  authors: "With Qiang Liu, Lizi Xiang, and Yaxuan Ran"

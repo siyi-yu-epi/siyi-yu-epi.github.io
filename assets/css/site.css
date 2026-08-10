@@ -1,26 +1,48 @@
-/* Overrides for jekyll-theme-minimal. Loaded after the theme stylesheet. */
+/* ==========================================================================
+   Overrides and components for jekyll-theme-minimal.
+   Loaded after the theme stylesheet, so plain element selectors win.
+   ========================================================================== */
 
-/* --- Page frame: narrow outer margins, wide content column --- */
+:root {
+  --ink: #1c1c1c;
+  --ink-soft: #3f3f3f;
+  --body: #4d4d4d;
+  --muted: #767676;
+  --rule: #e4e4e4;
+  --rule-soft: #efefef;
+  --accent: #1e6ba8;
+  --accent-dark: #14496f;
+  --bg: #ffffff;
+  --sidebar: 250px;
+  --gutter: 64px;
+}
+
+/* --- Page frame ---------------------------------------------------------- */
 
 body {
-  padding: 32px 24px;
+  /* The theme ships 14px/1.5; academic pages read better a notch larger. */
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--body);
+  padding: 48px 32px;
+  -webkit-font-smoothing: antialiased;
 }
 
 div.wrapper {
   width: auto;
-  max-width: 1500px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
   align-items: flex-start;
-  gap: 56px;
+  gap: var(--gutter);
 }
 
 header {
   float: none;
   position: sticky;
-  top: 32px;
-  width: 250px;
-  flex: 0 0 250px;
+  top: 48px;
+  width: var(--sidebar);
+  flex: 0 0 var(--sidebar);
   padding-right: 0;
 }
 
@@ -29,51 +51,163 @@ section {
   width: auto;
   flex: 1 1 auto;
   min-width: 0;
-  /* The theme adds top/bottom rules and padding below 960px; the flex layout
-     here survives further down than that, so neutralise them. */
+  /* The theme adds rules and padding to `section` below 960px; the two-column
+     layout here survives further down than that, so neutralise them. */
   border: none;
   margin: 0;
-  padding: 0 0 50px;
+  padding: 0 0 64px;
 }
 
-header h1 {
-  margin-bottom: 12px;
+/* --- Typography ---------------------------------------------------------- */
+
+h1, h2, h3, h4 {
+  color: var(--ink);
+  line-height: 1.25;
 }
 
-header p {
-  margin: 0 0 8px;
+a {
+  color: var(--accent);
+  text-decoration: none;
 }
 
-/* --- Profile photo --- */
+/* The theme bolds links on hover, which reflows the line. Underline instead. */
+a:hover,
+a:focus {
+  color: var(--accent-dark);
+  font-weight: inherit;
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+strong {
+  color: var(--ink);
+}
+
+/* --- Sidebar ------------------------------------------------------------- */
 
 .profile-photo {
   display: block;
-  width: 128px;
-  height: 128px;
+  width: 132px;
+  height: 132px;
   object-fit: cover;
   object-position: 50% 30%;
   border-radius: 50%;
+  margin: 0 0 20px;
+  background: var(--rule-soft);
+}
+
+header h1 {
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+}
+
+header h1 a {
+  color: var(--ink);
+}
+
+header h1 a:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.profile-role {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.45;
+  margin: 0 0 2px;
+}
+
+.profile-affiliation {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0 0 20px;
+}
+
+.profile-divider {
+  border: 0;
+  border-top: 1px solid var(--rule);
   margin: 0 0 18px;
-  border: 1px solid #e5e5e5;
 }
 
 .profile-contact {
-  color: #727272;
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 16px;
+  /* The address is written out in words; keep it from wrapping mid-phrase. */
+  overflow-wrap: break-word;
+}
+
+.profile-cv {
+  margin: 0 0 18px;
+}
+
+.profile-cv a {
+  display: inline-block;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 5px 12px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.profile-cv a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.profile-cv .profile-cv__date {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.profile-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+}
+
+.profile-links a {
+  display: inline-flex;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.profile-links a:hover,
+.profile-links a:focus-visible {
+  opacity: 1;
 }
 
 .profile-links img {
-  vertical-align: middle;
+  display: block;
+  width: 18px;
+  height: 18px;
 }
 
-/* --- Tabs --- */
+/* --- Tabs ---------------------------------------------------------------- */
 
 .tabs__list {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin: 0 0 24px;
+  gap: 2px;
+  margin: 0 0 32px;
   padding: 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--rule);
+  /* Keeps the tab strip reachable while reading a long panel. */
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 1;
 }
 
 .tabs__tab {
@@ -82,26 +216,31 @@ header p {
   border: none;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
-  padding: 8px 16px;
+  padding: 10px 18px 9px;
   font: inherit;
   font-size: 15px;
-  color: #727272;
+  color: var(--muted);
   cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.tabs__tab:first-child {
+  padding-left: 0;
 }
 
 .tabs__tab:hover {
-  color: #267CB9;
+  color: var(--ink);
 }
 
 .tabs__tab[aria-selected="true"] {
-  color: #267CB9;
-  border-bottom-color: #267CB9;
-  font-weight: bold;
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
 .tabs__tab:focus-visible {
-  outline: 2px solid #267CB9;
-  outline-offset: 2px;
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 2px;
 }
 
 .tab-panel[hidden] {
@@ -112,22 +251,255 @@ header p {
   margin-top: 0;
 }
 
-/* The per-panel heading is redundant once the tab strip is built. */
+/* Once the tab strip exists, the panel's own h2 just repeats the tab label. */
 .tabs--enhanced .tab-panel > h2:first-child {
   position: absolute;
   width: 1px;
   height: 1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
 }
 
-/* --- Responsive --- */
+/* --- Section headings inside panels -------------------------------------- */
+
+.tab-panel h3 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule-soft);
+  margin: 44px 0 20px;
+}
+
+.tab-panel > h3:first-of-type {
+  margin-top: 0;
+}
+
+.tabs--enhanced .tab-panel > h2:first-child + h3 {
+  margin-top: 0;
+}
+
+.lede {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/* --- Paper lists --------------------------------------------------------- */
+
+.paper-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: paper;
+}
+
+.paper {
+  position: relative;
+  padding: 0 0 20px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.paper-list > .paper:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.paper-list--numbered .paper {
+  padding-left: 30px;
+  counter-increment: paper;
+}
+
+.paper-list--numbered .paper::before {
+  content: counter(paper) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.paper__title {
+  display: block;
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.paper__authors,
+.paper__meta {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.paper__links {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.paper__links a + a {
+  margin-left: 14px;
+}
+
+.pill {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 9px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.paper__abstract {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.paper__abstract summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 13px;
+  width: fit-content;
+}
+
+.paper__abstract summary:hover {
+  text-decoration: underline;
+}
+
+.paper__abstract p {
+  margin: 8px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--rule);
+  color: var(--body);
+}
+
+/* --- Generic entry lists (courses, service) ------------------------------ */
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry {
+  padding: 0 0 14px;
+  margin: 0 0 14px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.entry-list > .entry:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.entry__title {
+  display: block;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.entry__meta {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.entry__body {
+  display: block;
+  margin-top: 6px;
+}
+
+/* --- News feed ----------------------------------------------------------- */
+
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news {
+  display: flex;
+  gap: 18px;
+  padding: 0 0 14px;
+  margin: 0 0 14px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.news-list > .news:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.news__date {
+  flex: 0 0 72px;
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  padding-top: 3px;
+}
+
+.news__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 15px;
+}
+
+/* --- Link list (About > Elsewhere) --------------------------------------- */
+
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 15px;
+}
+
+.link-list li:last-child {
+  border-bottom: 0;
+}
+
+.link-list .link-list__note {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* --- Footer -------------------------------------------------------------- */
+
+.site-footer {
+  float: none;
+  position: static;
+  width: auto;
+  margin-top: 56px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* --- Responsive ---------------------------------------------------------- */
 
 @media print, screen and (max-width: 900px) {
   body {
-    padding: 24px 16px;
+    padding: 32px 20px;
   }
 
   div.wrapper {
@@ -138,12 +510,55 @@ header p {
     position: static;
     width: auto;
     padding-right: 0;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
   }
 
   section {
-    border: none;
-    padding: 0 0 30px;
-    margin: 0;
+    padding: 0 0 40px;
+  }
+
+  .tabs__list {
+    /* A sticky strip costs too much vertical room on a phone. */
+    position: static;
+    margin-bottom: 26px;
+  }
+
+  .news {
+    display: block;
+  }
+
+  .news__date {
+    display: block;
+    margin-bottom: 2px;
+    padding-top: 0;
+  }
+}
+
+/* --- Print --------------------------------------------------------------- */
+
+@media print {
+  .tabs__list,
+  .profile-links {
+    display: none;
+  }
+
+  /* Tabs would otherwise hide three quarters of the page on paper. */
+  .tab-panel[hidden] {
+    display: block;
+  }
+
+  .tabs--enhanced .tab-panel > h2:first-child {
+    position: static;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    font-size: 18px;
+    margin: 28px 0 12px;
+  }
+
+  .paper__abstract {
+    display: none;
   }
 }

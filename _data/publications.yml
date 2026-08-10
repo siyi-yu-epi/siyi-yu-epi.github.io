@@ -1,0 +1,21 @@
+# Published and forthcoming work, newest first.
+#
+# Fields: title, authors, venue, detail, year, status, abstract, links[].
+# Everything except `title` is optional - omit what does not apply.
+# `abstract` renders as a collapsible "Abstract" toggle.
+
+- title: "Price versus service satisfaction: The role of direct and indirect leasing in the B2B sector"
+  authors: "Weng, W., Yang, Z., & Yu, S."
+  venue: "Journal of Business Research"
+  detail: "215, 116312"
+  year: 2026
+  links:
+    - label: "DOI"
+      url: "https://doi.org/10.1016/j.jbusres.2026.116312"
+
+- title: "Pharmaceutical Pricing"
+  authors: "Liu, Q., Yu, S., Wen, S., & Cai, Y."
+  venue: "Handbook of Pricing Research in Marketing"
+  detail: "edited by Vithala Rao and K. Sudhir"
+  year: 2026
+  status: "Forthcoming"

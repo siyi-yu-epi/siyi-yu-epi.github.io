@@ -1,0 +1,12 @@
+{%- comment -%}
+Dated update feed.
+  {% include news.html items=site.data.news %}
+{%- endcomment -%}
+<ul class="news-list">
+{%- for item in include.items %}
+  <li class="news">
+    <span class="news__date">{{ item.date }}</span>
+    <span class="news__body">{{ item.body }}</span>
+  </li>
+{%- endfor %}
+</ul>
