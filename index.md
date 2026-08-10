@@ -28,7 +28,7 @@ layout: default
 ## About
 {: #about-heading}
 
-I am a Clinical Assistant Professor of Management in the Marketing Department at the [Daniels School of Business](https://business.purdue.edu/), [Purdue University](https://www.purdue.edu/).
+I am a Clinical Assistant Professor of Management in the Marketing Department at the [Daniels School of Business](https://business.purdue.edu/), [Purdue University](https://www.purdue.edu/). I have a Ph.D. in Marketing and a B.A. in Economics from Peking University. 
 {: .lede}
 
 My research studies how people and physicians make healthcare decisions, and how public policy and market structure reshape those choices. I work on healthcare marketing, pharmaceutical markets, and the use of large language models in marketing research, combining causal inference, discrete choice models, and machine learning. Recent projects examine how state abortion bans changed the contraceptive service mix, how integrated delivery networks affect physician adoption of new drugs, and how demand shifts across the GLP-1 market.
@@ -38,25 +38,11 @@ My research studies how people and physicians make healthcare decisions, and how
 
 {% include news.html items=site.data.news %}
 
-### Elsewhere
-{: #elsewhere-heading}
-
-<!-- To add a link, copy one line and change the label, URL, and note. -->
-
-<ul class="link-list">
-  <li><a href="{{ site.google_scholar }}">Google Scholar</a> <span class="link-list__note">- publications and citations</span></li>
-  <li><a href="{{ site.ssrn }}">SSRN</a> <span class="link-list__note">- working papers</span></li>
-  <li><a href="{{ site.linkedin }}">LinkedIn</a> <span class="link-list__note">- professional profile</span></li>
-  <li><a href="{{ site.cv_path | relative_url }}">Curriculum vitae</a> <span class="link-list__note">- full record in PDF</span></li>
-</ul>
 
 ### Contact
 {: #contact-heading}
 
 For research and collaboration inquiries, email me at {{ site.email_display }}.
-
-Marketing Department, Daniels School of Business, Purdue University.
-<!-- Add the street address here if you want it public. -->
 
 
 </div>
