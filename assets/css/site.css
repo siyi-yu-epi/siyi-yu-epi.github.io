@@ -4,27 +4,30 @@
    ========================================================================== */
 
 :root {
-  --ink: #1c1c1c;
-  --ink-soft: #3f3f3f;
-  --body: #4d4d4d;
-  --muted: #767676;
-  --rule: #e4e4e4;
-  --rule-soft: #efefef;
-  --accent: #1e6ba8;
-  --accent-dark: #14496f;
+  --ink: #24292f;
+  --ink-soft: #363c43;
+  --body: #363c43;
+  --muted: #626971;
+  --rule: #e2e5e8;
+  --rule-soft: #f0f2f4;
+  --accent: #244c66;
+  --accent-dark: #163449;
   --bg: #ffffff;
   --sidebar: 250px;
-  --gutter: 64px;
+  --gutter: 80px;
 }
 
 /* --- Page frame ---------------------------------------------------------- */
 
 body {
-  /* The theme ships 14px/1.5; academic pages read better a notch larger. */
-  font-size: 16px;
-  line-height: 1.65;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.75;
   color: var(--body);
-  padding: 48px 32px;
+  background: var(--bg);
+  padding: 64px 40px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -40,7 +43,7 @@ div.wrapper {
 header {
   float: none;
   position: sticky;
-  top: 48px;
+  top: 40px;
   width: var(--sidebar);
   flex: 0 0 var(--sidebar);
   padding-right: 0;
@@ -62,20 +65,36 @@ section {
 
 h1, h2, h3, h4 {
   color: var(--ink);
-  line-height: 1.25;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+p {
+  margin: 0 0 24px;
+}
+
+.tab-panel > p {
+  max-width: 68ch;
 }
 
 a {
   color: var(--accent);
   text-decoration: none;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
 }
 
 /* The theme bolds links on hover, which reflows the line. Underline instead. */
 a:hover,
 a:focus {
   color: var(--accent-dark);
-  font-weight: inherit;
   text-decoration: underline;
+}
+
+/* Preserve link weight when either the mouse or keyboard focuses a link. */
+a:hover,
+a:focus {
+  font-weight: inherit;
 }
 
 a:focus-visible {
@@ -92,19 +111,23 @@ strong {
 
 .profile-photo {
   display: block;
-  width: 132px;
-  height: 132px;
+  width: 112px;
+  height: 112px;
   object-fit: cover;
   object-position: 50% 30%;
   border-radius: 50%;
-  margin: 0 0 20px;
+  margin: 0 0 24px;
   background: var(--rule-soft);
 }
 
+.profile-identity {
+  margin-bottom: 24px;
+}
+
 header h1 {
-  font-size: 24px;
-  letter-spacing: -0.01em;
-  margin: 0 0 4px;
+  font-size: 1.625rem;
+  letter-spacing: -0.035em;
+  margin: 0 0 12px;
 }
 
 header h1 a {
@@ -114,84 +137,68 @@ header h1 a {
 header h1 a:hover {
   color: var(--ink);
   text-decoration: none;
+  font-weight: inherit;
 }
 
 .profile-role {
   color: var(--ink-soft);
-  font-size: 15px;
-  line-height: 1.45;
-  margin: 0 0 2px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  margin: 0 0 6px;
 }
 
 .profile-affiliation {
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.45;
-  margin: 0 0 20px;
-}
-
-.profile-divider {
-  border: 0;
-  border-top: 1px solid var(--rule);
-  margin: 0 0 18px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .profile-contact {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--muted);
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   /* The address is written out in words; keep it from wrapping mid-phrase. */
   overflow-wrap: break-word;
 }
 
 .profile-cv {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
 }
 
 .profile-cv a {
   display: inline-block;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 5px 12px;
-  font-size: 14px;
-  color: var(--ink-soft);
+  padding: 2px 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .profile-cv a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  text-decoration: none;
+  color: var(--accent-dark);
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .profile-cv .profile-cv__date {
   display: block;
-  font-size: 12px;
+  font-size: 0.8125rem;
   color: var(--muted);
-  margin-top: 6px;
+  margin-top: 0;
 }
 
 .profile-links {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 14px;
+  gap: 4px 16px;
   margin: 0;
+  font-size: 0.875rem;
 }
 
 .profile-links a {
   display: inline-flex;
-  opacity: 0.5;
-  transition: opacity 0.15s ease;
-}
-
-.profile-links a:hover,
-.profile-links a:focus-visible {
-  opacity: 1;
-}
-
-.profile-links img {
-  display: block;
-  width: 18px;
-  height: 18px;
+  padding: 2px 0;
 }
 
 /* --- Tabs ---------------------------------------------------------------- */
@@ -199,8 +206,8 @@ header h1 a:hover {
 .tabs__list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
-  margin: 0 0 32px;
+  gap: 8px 28px;
+  margin: 0 0 36px;
   padding: 0;
   border-bottom: 1px solid var(--rule);
   /* Keeps the tab strip reachable while reading a long panel. */
@@ -216,16 +223,13 @@ header h1 a:hover {
   border: none;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
-  padding: 10px 18px 9px;
+  padding: 8px 0 12px;
   font: inherit;
-  font-size: 15px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
   color: var(--muted);
   cursor: pointer;
   transition: color 0.15s ease;
-}
-
-.tabs__tab:first-child {
-  padding-left: 0;
 }
 
 .tabs__tab:hover {
@@ -233,8 +237,8 @@ header h1 a:hover {
 }
 
 .tabs__tab[aria-selected="true"] {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
+  color: var(--accent);
+  border-bottom-color: var(--accent);
 }
 
 .tabs__tab:focus-visible {
@@ -264,18 +268,13 @@ header h1 a:hover {
 /* --- Section headings inside panels -------------------------------------- */
 
 .tab-panel h3 {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--muted);
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--rule-soft);
-  margin: 44px 0 20px;
-}
-
-.tab-panel > h3:first-of-type {
-  margin-top: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  padding: 0;
+  border: 0;
+  margin: 40px 0 16px;
 }
 
 .tabs--enhanced .tab-panel > h2:first-child + h3 {
@@ -283,7 +282,7 @@ header h1 a:hover {
 }
 
 .lede {
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.7;
   color: var(--ink-soft);
 }
@@ -299,9 +298,8 @@ header h1 a:hover {
 
 .paper {
   position: relative;
-  padding: 0 0 20px;
-  margin: 0 0 20px;
-  border-bottom: 1px solid var(--rule-soft);
+  padding: 0;
+  margin: 0 0 28px;
 }
 
 .paper-list > .paper:last-child {
@@ -311,7 +309,7 @@ header h1 a:hover {
 }
 
 .paper-list--numbered .paper {
-  padding-left: 30px;
+  padding-left: 26px;
   counter-increment: paper;
 }
 
@@ -321,21 +319,21 @@ header h1 a:hover {
   left: 0;
   top: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
 }
 
 .paper__title {
   display: block;
   color: var(--ink);
-  font-weight: 700;
-  line-height: 1.45;
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 .paper__authors,
 .paper__meta {
   display: block;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--muted);
   margin-top: 3px;
 }
@@ -343,7 +341,7 @@ header h1 a:hover {
 .paper__links {
   display: block;
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 0.875rem;
 }
 
 .paper__links a + a {
@@ -352,25 +350,20 @@ header h1 a:hover {
 
 .pill {
   display: inline-block;
-  margin-top: 8px;
-  padding: 2px 9px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  font-size: 12px;
-  letter-spacing: 0.02em;
+  margin-top: 4px;
+  font-size: 0.875rem;
   color: var(--muted);
-  white-space: nowrap;
 }
 
 .paper__abstract {
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .paper__abstract summary {
   cursor: pointer;
   color: var(--accent);
-  font-size: 13px;
+  font-size: 0.875rem;
   width: fit-content;
 }
 
@@ -394,9 +387,8 @@ header h1 a:hover {
 }
 
 .entry {
-  padding: 0 0 14px;
-  margin: 0 0 14px;
-  border-bottom: 1px solid var(--rule-soft);
+  padding: 0;
+  margin: 0 0 24px;
 }
 
 .entry-list > .entry:last-child {
@@ -408,19 +400,23 @@ header h1 a:hover {
 .entry__title {
   display: block;
   color: var(--ink);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .entry__meta {
   display: block;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--muted);
   margin-top: 2px;
 }
 
 .entry__body {
   display: block;
-  margin-top: 6px;
+  margin-top: 4px;
+}
+
+.entry-list + p {
+  margin-top: 28px;
 }
 
 /* --- News feed ----------------------------------------------------------- */
@@ -434,9 +430,8 @@ header h1 a:hover {
 .news {
   display: flex;
   gap: 18px;
-  padding: 0 0 14px;
-  margin: 0 0 14px;
-  border-bottom: 1px solid var(--rule-soft);
+  padding: 0;
+  margin: 0 0 16px;
 }
 
 .news-list > .news:last-child {
@@ -446,17 +441,17 @@ header h1 a:hover {
 }
 
 .news__date {
-  flex: 0 0 72px;
-  font-size: 13px;
+  flex: 0 0 76px;
+  font-size: 0.875rem;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
-  padding-top: 3px;
+  padding-top: 1px;
 }
 
 .news__body {
   flex: 1 1 auto;
   min-width: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 /* --- Link list (About > Elsewhere) --------------------------------------- */
@@ -469,8 +464,7 @@ header h1 a:hover {
 
 .link-list li {
   padding: 6px 0;
-  border-bottom: 1px solid var(--rule-soft);
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .link-list li:last-child {
@@ -479,7 +473,7 @@ header h1 a:hover {
 
 .link-list .link-list__note {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 /* --- Footer -------------------------------------------------------------- */
@@ -488,16 +482,16 @@ header h1 a:hover {
   float: none;
   position: static;
   width: auto;
-  margin-top: 56px;
+  margin-top: 48px;
   padding-top: 18px;
   border-top: 1px solid var(--rule-soft);
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--muted);
 }
 
 /* --- Responsive ---------------------------------------------------------- */
 
-@media print, screen and (max-width: 900px) {
+@media screen and (max-width: 900px) {
   body {
     padding: 32px 20px;
   }
@@ -507,12 +501,44 @@ header h1 a:hover {
   }
 
   header {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 20px 24px;
     position: static;
     width: auto;
     padding-right: 0;
-    margin-bottom: 32px;
-    padding-bottom: 28px;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
     border-bottom: 1px solid var(--rule);
+  }
+
+  .profile-photo {
+    width: 88px;
+    height: 88px;
+    margin: 0;
+  }
+
+  .profile-identity {
+    margin: 0;
+    min-width: 0;
+  }
+
+  header h1 {
+    margin-bottom: 8px;
+  }
+
+  .profile-details {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 24px;
+  }
+
+  .profile-contact,
+  .profile-cv,
+  .profile-links {
+    margin: 0;
   }
 
   section {
@@ -523,6 +549,39 @@ header h1 a:hover {
     /* A sticky strip costs too much vertical room on a phone. */
     position: static;
     margin-bottom: 26px;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 24px 20px;
+  }
+
+  header {
+    grid-template-columns: 64px minmax(0, 1fr);
+    column-gap: 18px;
+  }
+
+  .profile-photo {
+    width: 64px;
+    height: 64px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .profile-links {
+    flex-basis: 100%;
+  }
+
+  .tabs__list {
+    gap: 4px 18px;
+  }
+
+  .tabs__tab {
+    font-size: 0.875rem;
   }
 
   .news {
@@ -539,6 +598,22 @@ header h1 a:hover {
 /* --- Print --------------------------------------------------------------- */
 
 @media print {
+  body {
+    padding: 0;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  div.wrapper {
+    display: block;
+  }
+
+  header {
+    position: static;
+    width: auto;
+    margin-bottom: 32px;
+  }
+
   .tabs__list,
   .profile-links {
     display: none;

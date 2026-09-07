@@ -58,6 +58,10 @@ not collide with the panel's own id.
 
 - **assets/css/site.css** overrides the Minimal theme: page frame and margins, the
   sidebar, and the paper / entry / news / link list components.
+  The design uses a white background, charcoal system typography, and a deep
+  blue accent for links and the active tab. Lists are separated by whitespace;
+  the profile becomes a compact header on smaller screens. Scholar, SSRN, and
+  LinkedIn use text links rather than externally loaded icons.
 - **assets/js/tabs.js** turns the panels in `index.md` into an accessible tab set
   with arrow-key navigation and `#fragment` deep links. Without JavaScript the
   panels render stacked, so no content is ever hidden from readers or crawlers.

@@ -14,20 +14,23 @@
         {% if site.profile_image %}
           <img class="profile-photo" src="{{ site.profile_image | relative_url }}" alt="{{ site.profile_alt | escape }}">
         {% endif %}
-        <h1><a href="{{ "/" | absolute_url }}">{{ site.title }}</a></h1>
-        <p class="profile-role">{{ site.role }}</p>
-        <p class="profile-affiliation">{{ site.affiliation }}</p>
-        <hr class="profile-divider">
-        <p class="profile-contact">{{ site.email_display }}</p>
-        <p class="profile-cv">
-          <a href="{{ site.cv_path | relative_url }}">Curriculum vitae</a>
-          {% if site.cv_updated %}<span class="profile-cv__date">Last updated {{ site.cv_updated }}</span>{% endif %}
-        </p>
-        <p class="profile-links">
-          <a href="{{ site.google_scholar }}" aria-label="Google Scholar" title="Google Scholar"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/googlescholar.svg" alt="" width="18" height="18"></a>
-          <a href="{{ site.ssrn }}" aria-label="SSRN" title="SSRN"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/ssrn.svg" alt="" width="18" height="18"></a>
-          <a href="{{ site.linkedin }}" aria-label="LinkedIn" title="LinkedIn"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linkedin.svg" alt="" width="18" height="18"></a>
-        </p>
+        <div class="profile-identity">
+          <h1><a href="{{ "/" | absolute_url }}">{{ site.title }}</a></h1>
+          <p class="profile-role">{{ site.role }}</p>
+          <p class="profile-affiliation">{{ site.affiliation }}</p>
+        </div>
+        <div class="profile-details">
+          <p class="profile-contact">{{ site.email_display }}</p>
+          <p class="profile-cv">
+            <a href="{{ site.cv_path | relative_url }}">Curriculum vitae</a>
+            {% if site.cv_updated %}<span class="profile-cv__date">Updated {{ site.cv_updated }}</span>{% endif %}
+          </p>
+          <p class="profile-links">
+            <a href="{{ site.google_scholar }}" aria-label="Google Scholar">Google Scholar</a>
+            <a href="{{ site.ssrn }}" aria-label="SSRN">SSRN</a>
+            <a href="{{ site.linkedin }}" aria-label="LinkedIn">LinkedIn</a>
+          </p>
+        </div>
       </header>
       <section aria-label="Academic profile">
         {{ content }}
